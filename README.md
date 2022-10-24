@@ -1,2 +1,2 @@
-# xRangerAgent
+# xRangerTelemetry
 
