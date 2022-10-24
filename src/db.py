@@ -22,7 +22,9 @@ class BaseModel(Model):
 class Device(BaseModel):
     id = PrimaryKeyField()
     name = CharField(unique=True)
-    description = TextField(null=True)
+    connectionAddress = CharField(unique=True)
+    connectionPort = IntegerField()
+
 
 class RawMessage(BaseModel):
     id = PrimaryKeyField()
@@ -37,8 +39,8 @@ class RawMessage(BaseModel):
     @classmethod
     def from_mavlink_message(cls, message: mavutil.mavlink.MAVLink_message) -> 'RawMessage':
         msg_dict = message.to_dict()
-        device_id, component_id = message._msgbuf[5:7]
-        return RawMessage(device_id=device_id, component_id=component_id, message=str(msg_dict), timestamp=message.timestamp)
+        system_id, component_id = message._msgbuf[5:7]
+        return RawMessage(device_id=system_id, component_id=component_id, message=str(msg_dict), timestamp=message.timestamp)
 
     @classmethod
     def from_queue(cls, queue: FIFOQueue, limit: int = 1000):
