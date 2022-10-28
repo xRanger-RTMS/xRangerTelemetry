@@ -1,23 +1,6 @@
-import logging
 import threading
 import time
 
-from config import LOG_LEVEL
-
-_logger = None
-
-def get_logger():
-    global _logger
-    if _logger is None:
-        formatter = logging.Formatter(fmt='[%(asctime)s][%(levelname)s](%(module)s): %(message)s')
-
-        handler = logging.StreamHandler()
-        handler.setFormatter(formatter)
-
-        _logger = logging.getLogger('root')
-        _logger.setLevel(LOG_LEVEL)
-        _logger.addHandler(handler)
-    return _logger
 
 class IntervalThread:
     def __init__(self, interval, action):

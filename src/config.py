@@ -1,4 +1,5 @@
 import logging
+import os
 from os.path import dirname
 from pathlib import Path
 
@@ -6,16 +7,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Logging
-LOG_LEVEL = logging.INFO
-
-# Directories
+# [Directories]
 PROJECT_ROOT = Path(dirname(__file__)).parent
 DATA_DIR = PROJECT_ROOT / "data"
 
-# Change this to your device IP in Zerotier network. Use 127.0.0.1 when running on RPI
-MAVLINK_IP = "172.25.0.101"
+# [Database]
+DB_USE_SQLITE = True
+DB_SQLITE_PATH = DATA_DIR / "sqlite.db"
 
-# Database
-USE_SQLITE = True
-SQLITE_PATH = DATA_DIR / "sqlite.db"
+# [Logging]
+LOG_LEVEL = logging.INFO
+LOG_TO_FILE = os.environ.get("LOG_TO_FILE", "False") == "True"
+LOG_FILE = DATA_DIR / "log.txt"
+
+# [Telemetry Connection]
+TELE_UDP_BUFFER_SIZE = 25536
+TELE_LISTEN_IP = os.environ.get("UDP_LISTEN_IP", "127.0.0.1")
+TELE_LISTEN_PORTS = [20000]

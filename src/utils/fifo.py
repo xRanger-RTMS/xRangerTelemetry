@@ -10,5 +10,9 @@ class FIFOQueue:
             return None
     def is_empty(self):
         return len(self.queue) == 0
+
+    def __len__(self):
+        return len(self.queue)
+
     def __str__(self):
         return str(self.queue)

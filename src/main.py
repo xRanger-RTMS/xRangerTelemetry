@@ -1,21 +1,15 @@
 import time
 from threading import Thread
 
-from db import raw_message_queue, RawMessage
-from receiver import get_mavlink_connections, receive_all
-from util import IntervalThread, get_logger
+from db import thread_db
+from tele_receiver import thread_tele_receiver
 
 if __name__ == '__main__':
-    mavlink_connections = get_mavlink_connections()
-    get_logger().info(f'Found {len(mavlink_connections)} mavlink connections')
-    receive_threads = []
+    tele_receiver_thread = Thread(target=thread_tele_receiver, daemon=True)
+    db_thread = Thread(target=thread_db, daemon=True)
 
-    for connection in mavlink_connections:
-        thread = Thread(target=receive_all, args=(connection, raw_message_queue), daemon=True)
-        receive_threads.append(thread)
-        thread.start()
-
-    save_thread = IntervalThread(1, lambda: RawMessage.from_queue(raw_message_queue))
+    tele_receiver_thread.start()
+    db_thread.start()
 
     while True:
-        time.sleep(1)
+        pass
