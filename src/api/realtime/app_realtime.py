@@ -2,7 +2,7 @@ from flask import Blueprint
 
 from bot_status import get_robot, get_robots
 
-realtime_api = Blueprint('realtime_api', __name__, url_prefix='/api/rt')
+realtime_api = Blueprint('realtime_api', __name__, url_prefix='/api/realtime')
 
 
 @realtime_api.route('/status')
@@ -12,7 +12,7 @@ def status():
     }
 
 
-@realtime_api.route('/l/')
+@realtime_api.route('/list/')
 def online_list():
     return {
         "robots": [
@@ -25,7 +25,7 @@ def online_list():
         ]
     }
 
-@realtime_api.route('/r/<robot_id>/')
+@realtime_api.route('/robot/<robot_id>/')
 def status_info(robot_id: str):
     robot = get_robot(robot_id)
     if robot is None:
@@ -40,7 +40,7 @@ def status_info(robot_id: str):
     }
 
 
-@realtime_api.route('/r/<robot_id>/<message_type>')
+@realtime_api.route('/robot/<robot_id>/<message_type>')
 def detailed_info(robot_id: str, message_type: str):
     robot = get_robot(robot_id)
     if robot is None:
