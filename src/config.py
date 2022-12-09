@@ -24,3 +24,7 @@ LOG_FILE = DATA_DIR / "log.txt"
 TELE_UDP_BUFFER_SIZE = 25536
 TELE_LISTEN_IP = os.environ.get("UDP_LISTEN_IP", "127.0.0.1")
 TELE_LISTEN_PORTS = [20000]
+
+# [API Server]
+API_LISTEN_IP = os.environ.get("API_LISTEN_IP", "127.0.0.1")
+API_LISTEN_PORT = os.environ.get("API_LISTEN_PORT", 15000)

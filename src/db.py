@@ -32,15 +32,13 @@ class BaseModel(Model):
         database = get_connection()
 
 
-class Device(BaseModel):
+class Robot(BaseModel):
     id = CharField(primary_key=True)
-    connectionAddress = CharField(unique=True)
-    connectionPort = IntegerField()
-
+    encryption_key = CharField(null=True)
 
 class RawMessage(BaseModel):
     id = PrimaryKeyField()
-    robot_id = ForeignKeyField(Device, backref='raw_messages')
+    robot_id = ForeignKeyField(Robot, backref='raw_messages')
     system_id = IntegerField()
     component_id = IntegerField()
     timestamp = DateTimeField(default=datetime.datetime.now())
@@ -51,7 +49,7 @@ class RawMessage(BaseModel):
         db_table = 'raw_messages'
 
     @classmethod
-    def from_mavlink_message(cls, robot_id: str, timestamp:datetime.datetime,
+    def from_mavlink_message(cls, robot_id: str, timestamp: datetime.datetime,
                              message: mavutil.mavlink.MAVLink_message) -> 'RawMessage':
         msg_dict = message.to_dict()
         system_id, component_id = message._msgbuf[5:7]
@@ -70,9 +68,11 @@ class RawMessage(BaseModel):
                 messages.append(cls.from_mavlink_message(robot_id, timestamp, message))
         return messages
 
+
 def thread_db():
     get_logger().info('Starting database thread')
     IntervalThread(1, save_messages_from_queue)
+
 
 def save_messages_from_queue():
     queue = get_messages_to_save_queue()
@@ -80,6 +80,10 @@ def save_messages_from_queue():
     RawMessage.bulk_create(messages)
     get_logger().info(f'Saved {len(messages)} messages to database')
 
+
 if __name__ == '__main__':
-    get_connection().create_tables([Device, RawMessage])
+    # Initialize database
+    get_connection().create_tables([Robot, RawMessage])
+    Robot.get_or_create(id='RPI')
+    Robot.get_or_create(id='RPI2')
     get_connection().close()

@@ -4,6 +4,7 @@ import time
 from pymavlink import mavutil
 from pymavlink.dialects.v20.ardupilotmega import MAVLink
 
+from bot_status import get_messages_to_update_queue
 from config import TELE_LISTEN_IP, TELE_LISTEN_PORTS
 from db import messages_to_save_queue, get_messages_to_save_queue
 from utils.fifo import FIFOQueue
@@ -39,8 +40,10 @@ def thread_tele_receiver():
             if messages is not None:
                 for msg in messages:
                     get_logger().debug(f'Received message: {msg.to_dict()}')
-                    get_messages_to_save_queue().enqueue(
-                        (tele_packet.robot_id, tele_packet.timestamp, msg))
+                    message_info = (tele_packet.robot_id, tele_packet.timestamp, msg)
+
+                    get_messages_to_save_queue().enqueue(message_info)
+                    get_messages_to_update_queue().put(message_info)
             else:
                 get_logger().debug(
                     f'Failed to get mavlink messages from tele packet: {tele_packet.to_bytes()}')

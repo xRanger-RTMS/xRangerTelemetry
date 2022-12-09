@@ -1,12 +1,12 @@
 import datetime
-from typing import Optional
+from typing import Optional, List
 
 from pymavlink import mavutil
-from pymavlink.dialects.v20.ardupilotmega import MAVLink
+from pymavlink.dialects.v20.ardupilotmega import MAVLink, MAVLink_message
 
 from utils.compression import compress, decompress
 from utils.fifo import FIFOQueue
-from utils.mavlink_packet import merge_packages
+from utils.mavlink_packet import merge_packages, split_packages
 
 
 # Custom datagram (Telemetry Packet) format:
@@ -18,7 +18,7 @@ from utils.mavlink_packet import merge_packages
 # m bytes: identifier
 # x bytes: payload (up to 100 mavlink messages concatenated)
 class TelemetryPacket:
-    def __init__(self, robot_id: str, message_bytes: bytes,
+    def __init__(self, robot_id: str, message_bytes: List[bytes],
                  timestamp: datetime.datetime = None):
         self.robot_id = robot_id
         self.message_bytes = message_bytes
@@ -50,14 +50,14 @@ class TelemetryPacket:
                 break
             messages.append(queue.dequeue())
         messages_binary = [m._msgbuf for m in messages]
-        return cls(robot_id=robot_id, message_bytes=merge_packages(messages_binary))
+        return cls(robot_id=robot_id, message_bytes=messages_binary)
 
-    def get_messages(self) -> [mavutil.mavlink.MAVLink_message]:
+    def get_messages(self) -> [MAVLink_message]:
         parser = MAVLink(None)
-        return parser.parse_buffer(self.message_bytes)
+        return parser.parse_buffer(merge_packages(self.message_bytes))
 
     def to_bytes(self) -> bytes:
-        payload = self._add_robot_id(self.robot_id, self.message_bytes)
+        payload = self._add_robot_id(self.robot_id, merge_packages(self.message_bytes))
         return self._add_packet_header(payload, self.timestamp)
 
     @classmethod
@@ -74,7 +74,7 @@ class TelemetryPacket:
             robot_id = payload[1:1 + identifier_length].decode("utf-8")
             message_bytes = payload[1 + identifier_length:]
 
-            return cls(robot_id=robot_id, message_bytes=message_bytes,
+            return cls(robot_id=robot_id, message_bytes=split_packages(message_bytes),
                        timestamp=datetime.datetime.fromtimestamp(timestamp / 1000.0))
         except ValueError:
             return None
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         b"\xb5\x00\x95\xfc\x30\x00\x36\x00\xb1\xff\xc2\x55"
     ]
 
-    packet = TelemetryPacket(robot_id="ROBOT_ID", message_bytes=merge_packages(mavlink_packets))
+    packet = TelemetryPacket(robot_id="ROBOT_ID", message_bytes=mavlink_packets)
     packet_bytes = packet.to_bytes()
     packet2 = TelemetryPacket.from_bytes(packet_bytes)
 
