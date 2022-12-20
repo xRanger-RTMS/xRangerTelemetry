@@ -1,10 +1,14 @@
 from flask import Flask
+from flask_cors import CORS
 
 from api.realtime.app_realtime import realtime_api
 from config import API_LISTEN_IP, API_LISTEN_PORT
 
 app = Flask(__name__)
-app.register_blueprint(realtime_api)
+CORS(app)
+
+# register blueprint with url prefix '/api/v1'
+app.register_blueprint(realtime_api, url_prefix='/api/v1/realtime')
 
 @app.errorhandler(Exception)
 def handle_exception(e):

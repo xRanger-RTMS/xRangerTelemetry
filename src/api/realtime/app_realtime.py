@@ -2,7 +2,7 @@ from flask import Blueprint
 
 from bot_status import get_robot, get_robots
 
-realtime_api = Blueprint('realtime_api', __name__, url_prefix='/api/realtime')
+realtime_api = Blueprint('realtime_api', __name__)
 
 
 @realtime_api.route('/status')
