@@ -85,8 +85,9 @@ def thread_bot_status():
     get_logger().info(f"Loaded {len(robot_ids)} robot(s) from database")
 
     # Create a simulated robot
-    get_robots()["RPI_SIM"] = SimulatedRobotStatus("RPI_SIM", "RPI2")
-    get_logger().info(f"Simulated robot {'simulated'} created")
+    SIMULATED_ROBOT_ID = "RPI_SIM"
+    get_robots()[SIMULATED_ROBOT_ID] = SimulatedRobotStatus(SIMULATED_ROBOT_ID, "RPI2")
+    get_logger().info(f"Simulated robot {SIMULATED_ROBOT_ID} created")
 
     queue = get_messages_to_update_queue()
     while True:
