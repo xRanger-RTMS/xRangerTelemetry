@@ -13,7 +13,7 @@ DATA_DIR = PROJECT_ROOT / "data"
 
 # [Database]
 DB_USE_SQLITE = True
-DB_SQLITE_PATH = DATA_DIR / "sqlite.db"
+DB_SQLITE_PATH = DATA_DIR / "db_example.sqlite3"
 
 # [Logging]
 LOG_LEVEL = logging.INFO
