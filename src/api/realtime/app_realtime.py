@@ -7,19 +7,7 @@ from bot_status import get_robot, get_robots
 realtime_api = Blueprint('realtime_api', __name__)
 
 
-@realtime_api.route('/status')
-def status():
-    return {
-        "status": "online"
-    }
 
-@realtime_api.route('/time')
-def time():
-    # return the current timestamp in milliseconds
-    timestamp = int(datetime.now().timestamp() * 1000)
-    return {
-        "time": timestamp
-    }
 
 @realtime_api.route('/list/')
 def online_list():
