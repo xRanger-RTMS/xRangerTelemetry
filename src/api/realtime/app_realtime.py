@@ -33,7 +33,8 @@ def status_info(robot_id: str):
     return {
         "robot_id": robot_id,
         "is_online": robot.is_online(),
-        "last_update_time": robot.last_update_time.timestamp() * 1000 if robot.last_update_time is not None else None
+        "last_update_time": robot.last_update_time.timestamp() * 1000 if robot.last_update_time is not None else None,
+        "available_message_types": list(robot.status_messages.keys()),
     }
 
 

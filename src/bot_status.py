@@ -62,6 +62,8 @@ class SimulatedRobotStatus(RobotStatus):
         super().__init__(robot_id)
         self.reference_robot_id = reference_robot_id
 
+    # todo: 为模拟机器人生成各种数据
+
     def get_status_json(self, message_type: str) -> Dict:
         # Get raw message from table "raw_messages" with message_type and reference_robot_id
         message_row = RawMessage.get(RawMessage.message_type == message_type,

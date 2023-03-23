@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd50dd65-da8d-4630-b4d2-687e15be7b53" name="Changes" comment="Add README.md">
-      <change afterPath="$PROJECT_DIR$/src/api/common/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/common/app_common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/historical/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/historical/app_historical.py" afterDir="false" />
+    <list default="true" id="fd50dd65-da8d-4630-b4d2-687e15be7b53" name="Changes" comment="Modify API definition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/xRangerTelemetry.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/xRangerTelemetry.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/db_example.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/data/db_example.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/realtime/app_realtime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/realtime/app_realtime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bot_status.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot_status.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,21 +50,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/ProjectsLocal/xRanger-RTMS/xRangerTelemetry/src/api/common",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ProjectsLocal/xRanger-RTMS/xRangerTelemetry/src/api/common&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PythonContentEntriesConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ProjectsLocal\xRanger-RTMS\xRangerTelemetry\src\api\common" />
@@ -267,7 +263,10 @@
       <workItem from="1675215948425" duration="2298000" />
       <workItem from="1675219911558" duration="1812000" />
       <workItem from="1679349195773" duration="337000" />
-      <workItem from="1679349546944" duration="3531000" />
+      <workItem from="1679349546944" duration="5383000" />
+      <workItem from="1679370964004" duration="619000" />
+      <workItem from="1679516050673" duration="771000" />
+      <workItem from="1679539101760" duration="3722000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented basic data receiving and storing with sqlite">
       <created>1666568356646</created>
@@ -353,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675222086624</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Modify API definition">
+      <created>1679355079562</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679355079562</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +382,8 @@
     <MESSAGE value="Added simulated bot based on past bot data" />
     <MESSAGE value="Add example database with example data" />
     <MESSAGE value="Add README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add README.md" />
+    <MESSAGE value="Modify API definition" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify API definition" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/xRangerTelemetry$recv_all.coverage" NAME="recv_all Coverage Results" MODIFIED="1666559441609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
@@ -390,7 +397,7 @@
     <SUITE FILE_PATH="coverage/xRangerTelemetry$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1671689466644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/api" />
     <SUITE FILE_PATH="coverage/xRangerTelemetry$config.coverage" NAME="config Coverage Results" MODIFIED="1673182158953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/xRangerTelemetry$data_receiver.coverage" NAME="data_receiver Coverage Results" MODIFIED="1666559666853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/xRangerTelemetry$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1679354398987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/xRangerTelemetry$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1679551761366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/xRangerTelemetry$receiver__1_.coverage" NAME="receiver (1) Coverage Results" MODIFIED="1666567954631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/xRangerTelemetry$tele_packet_receiver__1_.coverage" NAME="tele_packet_receiver (1) Coverage Results" MODIFIED="1666910567846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/xRangerTelemetry$receive__1_.coverage" NAME="receive (1) Coverage Results" MODIFIED="1666562500087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
