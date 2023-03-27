@@ -3,3 +3,4 @@ cryptography==38.0.1
 python-dotenv==0.21.0
 flask==2.2.2
 flask-cors==3.0.10
+peewee==3.15.3
